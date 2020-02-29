@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <Scene/>
+    <Scene />
   </div>
 </template>
 
 <script>
-import Scene from './components/Scene.vue'
+import Scene from "./components/Scene.vue";
 export default {
-  name: 'app',
+  name: "app",
   components: {
     Scene
   }
@@ -18,12 +18,13 @@ export default {
 body, .app{
   margin: 0;
   padding: 0;
-    background: #000;
-
+  background: #000;
   overflow: hidden;
+  width: 100vw;
+  height: 100vh;
 }
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
