@@ -28,6 +28,7 @@ export default {
       geometry: null,
       material: null,
       mesh: null,
+      away: true,
       // circleColor : Math.random() * 0x42b983 + 0x42b983,
       circleColor: 5782276.748546636
     };
@@ -36,6 +37,19 @@ export default {
     this.init();
     this.animate();
     this.addTouchHandler();
+    setInterval(() => {
+      if (this.camera.position.z < 0) this.away = false;
+      if (this.camera.position.z > 1000) this.away = true;
+      if (this.away) {
+        this.camera.position.z -= 0.5;
+      } else this.camera.position.z -= 0.5;
+
+      this.camera.position.x++;
+      if (this.camera.position.y < 700) this.camera.position.y += 0.5;
+      else this.camera.position.y -= 0.5;
+      this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+      this.renderer.render(this.scene, this.camera);
+    }, 1);
   },
   methods: {
     init: function() {
@@ -63,7 +77,7 @@ export default {
         roughness: 0,
         metalness: 1
       });
-      var light = new THREE.DirectionalLight(0x404040, 60); // soft white light
+      var light = new THREE.DirectionalLight(0x404040, 160); // soft white light
       light.position.set(30, 10, 50);
       var light2 = new THREE.DirectionalLight(0x404040, 50); // another light
       light2.position.set(-30, -50, 250);
@@ -76,7 +90,7 @@ export default {
         // this.circleColor = Math.random() * 0x42b983 + 0x42b983;
         this.material = new THREE.MeshStandardMaterial({
           color: this.circleColor,
-          roughness: 0.11,
+          roughness: 0.17,
           metalness: 1
         });
 
@@ -84,8 +98,7 @@ export default {
         circle.position.x = Math.random() * 2500 - 1500;
         circle.position.y = Math.random() * 2500 - 1500;
         circle.position.z = Math.random() * 2500 - 1500;
-
-        circle.scale.x = circle.scale.y = Math.random() * 12 + 5;
+        circle.scale.x = circle.scale.y = Math.random() * 12 + 10;
         this.scene.add(circle);
         this.geometry.vertices.push(new THREE.Vector3(circle.position));
       }
